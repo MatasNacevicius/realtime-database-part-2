@@ -141,10 +141,19 @@ onAuthStateChanged(auth, (user) => {
         if (snapshot.exists()) {
           const userDataFromDB = snapshot.val();
           const userRole = userDataFromDB.role;
+          const img = document.getElementById("imgContainer");
+          const greetings = document.createElement("img");
+          greetings.alt = "greeting";
+          greetings.id = "panelImg";
+          img.appendChild(greetings);
           if (userRole === "admin") {
             console.log("god mode");
+            greetings.src =
+              "https://i.ytimg.com/vi/H8xXhWWHldU/maxresdefault.jpg";
           } else {
             console.log("nevykelis");
+            greetings.src =
+              "https://lol.tv3.lt/uploads/modules/lols/videos/original/40074_1345311592_5502.jpg";
           }
         } else {
           console.log("no data");
@@ -163,6 +172,8 @@ outBtn.addEventListener("click", (event) => {
   auth
     .signOut()
     .then(() => {
+      const img = document.getElementById("panelImg");
+      img.remove();
       console.log("user has signed out");
     })
     .catch((error) => {
